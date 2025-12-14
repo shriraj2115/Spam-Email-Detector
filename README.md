@@ -1,183 +1,195 @@
-Spam Email Detection Using TensorFlow in Python
+# Spam Email Detection Using TensorFlow in Python
 
-Automatically detecting spam emails helps reduce inbox clutter and protects users from phishing or malicious content. This project builds a deep learning model using TensorFlow and Keras to classify emails as Spam or Ham (Not Spam).
 
-Table of Contents
+Automatically detecting spam emails helps reduce inbox clutter and protects users from phishing or malicious content. This project builds a **deep learning model** using TensorFlow and Keras to classify emails as **Spam** or **Ham (Not Spam)**.
 
-Overview
+---
 
-Dataset
+## Table of Contents
 
-Dataset Columns
+* [Overview](#overview)
+* [Dataset](#dataset)
 
-Class Imbalance Handling
+  * [Dataset Columns](#dataset-columns)
+  * [Class Imbalance Handling](#class-imbalance-handling)
+* [Features](#features)
+* [Installation](#installation)
+* [Usage](#usage)
 
-Features
+  * [Loading the Dataset](#loading-the-dataset)
+  * [Text Preprocessing](#text-preprocessing)
 
-Installation
+    * [Removing Stopwords](#removing-stopwords)
+    * [Removing Punctuations](#removing-punctuations)
+  * [Tokenization and Padding](#tokenization-and-padding)
+  * [Model Training](#model-training)
+  * [Evaluation](#evaluation)
+* [Model Architecture](#model-architecture)
+* [Training and Evaluation](#training-and-evaluation)
 
-Usage
+  * [EarlyStopping and ReduceLROnPlateau](#earlystopping-and-reducelronplateau)
+  * [Accuracy Plot](#accuracy-plot)
+* [Visualizations](#visualizations)
 
-Loading the Dataset
+  * [WordCloud for Ham Emails](#wordcloud-for-ham-emails)
+  * [WordCloud for Spam Emails](#wordcloud-for-spam-emails)
+* [Contributing](#contributing)
+* [License](#license)
 
-Text Preprocessing
+---
 
-Removing Stopwords
+## Overview
 
-Removing Punctuations
-
-Tokenization and Padding
-
-Model Training
-
-Evaluation
-
-Model Architecture
-
-Training and Evaluation
-
-EarlyStopping and ReduceLROnPlateau
-
-Accuracy Plot
-
-Visualizations
-
-WordCloud for Ham Emails
-
-WordCloud for Spam Emails
-
-Contributing
-
-License
-
-Overview
-
-This project implements a deep learning-based spam email classifier. It automatically classifies emails into Spam or Ham (Not Spam) using natural language processing (NLP) and TensorFlow.
+This project implements a **deep learning-based spam email classifier**. It automatically classifies emails into **Spam** or **Ham (Not Spam)** using natural language processing (NLP) techniques and TensorFlow.
 
 The workflow includes:
 
-Data preprocessing and cleaning
+1. Data preprocessing and cleaning
+2. Handling class imbalance
+3. Tokenization and sequence padding
+4. Training an LSTM-based deep learning model
+5. Evaluating model performance
+6. Visualizing results
 
-Handling class imbalance
+---
 
-Tokenization and padding for text sequences
+## Dataset
 
-Training an LSTM-based model
+### Dataset Columns
 
-Evaluating model performance
+The dataset (`Emails.csv`) contains emails labeled as spam or ham, with the main columns:
 
-Visualizing results
+* **text**: the content of the email
+* **label**: the classification (`spam` or `ham`)
 
-Dataset
-Dataset Columns
+It contains **5171 emails**, providing a sufficient sample for training and evaluation.
 
-The dataset (Emails.csv) contains emails labeled as spam or ham, with the main columns:
+### Class Imbalance Handling
 
-text: the content of the email
+The dataset is imbalanced, with significantly more ham emails than spam. To prevent bias:
 
-label: the classification (spam or ham)
+* The majority class (ham) is downsampled to match the number of spam emails.
+* This ensures balanced training and improved model performance.
 
-The dataset contains 5171 emails, providing a sufficient sample for training and evaluation.
+---
 
-Class Imbalance Handling
+## Features
 
-The dataset has significantly more ham emails than spam. To prevent bias during training, the majority class (ham) is downsampled to match the number of spam emails, creating a balanced dataset.
+* Text preprocessing to remove noise and irrelevant content
+* Handling imbalanced datasets to improve accuracy
+* Tokenization and padding to convert text into numerical sequences
+* LSTM-based sequential model for classification
+* EarlyStopping and ReduceLROnPlateau callbacks for optimized training
+* WordCloud visualizations to explore common words in spam and ham emails
 
-Features
+---
 
-Text preprocessing to remove noise and irrelevant content
+## Installation
 
-Handling imbalanced datasets to improve model accuracy
+1. Clone the repository.
+2. Install the required Python libraries, including:
 
-Tokenization and padding to convert text into sequences suitable for deep learning models
+   * TensorFlow
+   * Keras
+   * Pandas
+   * NumPy
+   * Matplotlib
+   * Seaborn
+   * NLTK
+   * WordCloud
+   * scikit-learn
 
-LSTM-based sequential model for classification
+---
 
-EarlyStopping and learning rate reduction during training to optimize performance
+## Usage
 
-WordCloud visualizations to explore the most frequent words in spam and ham emails
-
-Installation
-
-Clone the repository.
-
-Install the required Python libraries, including TensorFlow, Keras, Pandas, NumPy, Matplotlib, Seaborn, NLTK, WordCloud, and scikit-learn.
-
-Usage
-Loading the Dataset
+### Loading the Dataset
 
 Load the email dataset and inspect the structure to understand the columns and class distribution.
 
-Text Preprocessing
+### Text Preprocessing
 
-Text preprocessing is essential to improve model performance:
+Text preprocessing is essential to improve model performance.
 
-Removing Stopwords: Removes common words that do not contribute to classification.
+#### Removing Stopwords
 
-Removing Punctuations: Eliminates punctuation symbols to clean the text.
+Stopwords (common words like "the", "is") are removed to reduce noise.
 
-Optional steps include removing headers or unnecessary tokens in email content.
+#### Removing Punctuations
 
-Tokenization and Padding
+Punctuation symbols are removed to clean the text.
 
-The text data is converted into numerical sequences using tokenization, and sequences are padded to a fixed length to make them compatible with the deep learning model.
+Optional steps include removing email headers or unnecessary tokens.
 
-Model Training
+### Tokenization and Padding
 
-The model is an LSTM-based sequential architecture designed to capture patterns in sequences. Training includes using EarlyStopping to avoid overfitting and ReduceLROnPlateau to fine-tune learning rates.
+Text data is converted into numerical sequences, and sequences are padded to a fixed length for compatibility with the deep learning model.
 
-Evaluation
+### Model Training
 
-After training, the model is evaluated on a test set to determine accuracy, loss, and overall performance in classifying emails.
+The model is a sequential LSTM architecture designed to capture patterns in email text.
 
-Model Architecture
+* EarlyStopping is used to prevent overfitting.
+* ReduceLROnPlateau is applied to adjust learning rate during training.
+
+### Evaluation
+
+After training, the model is evaluated on a test set to measure accuracy and overall performance.
+
+---
+
+## Model Architecture
 
 The model consists of:
 
-Embedding Layer: Converts words into dense vector representations
+* **Embedding Layer:** Converts words into vector representations
+* **LSTM Layer:** Captures sequential patterns in text
+* **Dense Layer:** Extracts important features
+* **Output Layer:** Predicts spam or ham using sigmoid activation
 
-LSTM Layer: Captures sequential patterns in email text
+This architecture allows the model to learn complex text patterns effectively.
 
-Dense Layer: Extracts relevant features
+---
 
-Output Layer: Sigmoid activation predicts spam or ham
+## Training and Evaluation
 
-This architecture allows the model to learn complex patterns in text while remaining efficient.
+### EarlyStopping and ReduceLROnPlateau
 
-Training and Evaluation
-EarlyStopping and ReduceLROnPlateau
+* **EarlyStopping:** Stops training when validation accuracy stops improving.
+* **ReduceLROnPlateau:** Reduces learning rate when validation loss plateaus.
 
-EarlyStopping: Stops training when validation performance stops improving to prevent overfitting
-
-ReduceLROnPlateau: Reduces learning rate when the validation loss plateaus, enabling finer adjustments to model weights
-
-Accuracy Plot
+### Accuracy Plot
 
 Training and validation accuracy are monitored over epochs to ensure convergence and detect overfitting.
 
-Visualizations
-WordCloud for Ham Emails
+---
 
-WordClouds display the most frequent words in non-spam emails, helping to identify typical content.
+## Visualizations
 
-WordCloud for Spam Emails
+### WordCloud for Ham Emails
 
-WordClouds for spam emails highlight common spam keywords and patterns.
+Visualizes the most frequent words in non-spam emails to understand typical content.
 
-Contributing
+### WordCloud for Spam Emails
 
-Contributions are welcome! Steps:
+Highlights common keywords and patterns found in spam emails.
 
-Fork the repository
+---
 
-Create a feature branch
+## Contributing
 
-Commit your changes
+Contributions are welcome!
 
-Push to your branch
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature-name`)
+3. Commit your changes (`git commit -m "Add feature"`)
+4. Push to your branch (`git push origin feature-name`)
+5. Open a Pull Request
 
-Open a Pull Request
+---
 
-License
+## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
+
