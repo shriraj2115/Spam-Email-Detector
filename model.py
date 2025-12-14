@@ -146,6 +146,11 @@ print(f"Test Accuracy: {accuracy:.4f}")
 # Save Model & Tokenizer
 # =============================
 model.save("spam_model.h5")
+import tensorflow as tf
+
+model = tf.keras.models.load_model("spam_model.h5")
+model.save("spam_model.keras")
+
 
 with open("tokenizer.pkl", "wb") as f:
     pickle.dump(tokenizer, f)
