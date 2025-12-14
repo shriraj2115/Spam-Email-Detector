@@ -8,14 +8,26 @@ Automatically detecting spam emails helps reduce clutter and protect users from 
 ## Table of Contents
 - [Overview](#overview)  
 - [Dataset](#dataset)  
+  - [Dataset Columns](#dataset-columns)  
+  - [Class Imbalance Handling](#class-imbalance-handling)  
 - [Features](#features)  
 - [Installation](#installation)  
 - [Usage](#usage)  
+  - [Loading the Dataset](#loading-the-dataset)  
+  - [Text Preprocessing](#text-preprocessing)  
+  - [Tokenization and Padding](#tokenization-and-padding)  
+  - [Model Training](#model-training)  
+  - [Evaluation](#evaluation)  
 - [Model Architecture](#model-architecture)  
 - [Training and Evaluation](#training-and-evaluation)  
+  - [EarlyStopping and ReduceLROnPlateau](#earlystopping-and-reducelronplateau)  
+  - [Accuracy Plot](#accuracy-plot)  
 - [Visualizations](#visualizations)  
+  - [WordCloud for Ham Emails](#wordcloud-for-ham-emails)  
+  - [WordCloud for Spam Emails](#wordcloud-for-spam-emails)  
 - [Contributing](#contributing)  
 - [License](#license)  
+
 
 ---
 
@@ -59,3 +71,4 @@ Clone the repository and install the required libraries:
 git clone <repository-url>
 cd spam-email-detection
 pip install -r requirements.txt
+
